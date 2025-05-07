@@ -1,0 +1,1263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> It's Street Coffee </title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* CSS Variables */
+        :root {
+            --coffee-brown: #6F4E37;
+            --cream: #F5F5DC;
+            --dark-green: #2F4F4F;
+            --light-brown: #A67C52;
+            --off-white: #FAF9F6;
+            --transition: all 0.3s ease;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --border-radius: 8px;
+        }
+
+        /* Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: var(--coffee-brown);
+            background-color: var(--cream);
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: var(--dark-green);
+            color: var(--cream);
+            padding: 12px 24px;
+            border-radius: var(--border-radius);
+            font-weight: 500;
+            cursor: pointer;
+            transition: var(--transition);
+            border: none;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .btn:hover {
+            background-color: var(--coffee-brown);
+            transform: translateY(-2px);
+        }
+
+        section {
+            padding: 80px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+            color: var(--coffee-brown);
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background-color: var(--dark-green);
+        }
+
+        /* Header Styles */
+        header {
+            background-color: var(--cream);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: var(--shadow);
+            padding: 15px 0;
+            transition: var(--transition);
+        }
+
+        header.scrolled {
+            padding: 10px 0;
+            background-color: rgba(245, 245, 220, 0.95);
+            backdrop-filter: blur(5px);
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 700;
+            font-size: 1.5rem;
+            color: var(--coffee-brown);
+        }
+
+        .logo i {
+            font-size: 1.8rem;
+        }
+
+        nav ul {
+            display: flex;
+            gap: 30px;
+        }
+
+        nav a {
+            font-weight: 500;
+            transition: var(--transition);
+            position: relative;
+        }
+
+        nav a:hover {
+            color: var(--dark-green);
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--dark-green);
+            transition: var(--transition);
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        .mobile-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--coffee-brown);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Hero Section Styles */
+        .hero {
+            min-height: 100vh;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            padding: 2rem 0;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .hero p {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        /* Menu Section */
+        .menu {
+            background-color: var(--off-white);
+        }
+
+        .menu-tabs {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 40px;
+            gap: 10px;
+        }
+
+        .menu-tab {
+            padding: 10px 20px;
+            background-color: var(--cream);
+            border: 2px solid var(--coffee-brown);
+            color: var(--coffee-brown);
+            cursor: pointer;
+            transition: var(--transition);
+            border-radius: var(--border-radius);
+        }
+
+        .menu-tab.active, .menu-tab:hover {
+            background-color: var(--coffee-brown);
+            color: var(--cream);
+        }
+
+        .menu-content {
+            display: none;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .menu-content.active {
+            display: grid;
+        }
+
+        .menu-item {
+            background-color: var(--cream);
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+
+        .menu-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .menu-item-img {
+            height: 200px;
+            overflow: hidden;
+        }
+
+        .menu-item-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+
+        .menu-item:hover .menu-item-img img {
+            transform: scale(1.1);
+        }
+
+        .menu-item-content {
+            padding: 20px;
+        }
+
+        .menu-item-title {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+
+        .menu-item-title h3 {
+            color: var(--coffee-brown);
+        }
+
+        .menu-item-title .price {
+            color: var(--dark-green);
+            font-weight: 600;
+        }
+
+        .menu-item-desc {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        /* Events Section */
+        .events {
+            background-color: var(--dark-green);
+            color: var(--cream);
+        }
+
+        .events .section-title {
+            color: var(--cream);
+        }
+
+        .events .section-title::after {
+            background-color: var(--cream);
+        }
+
+        .events-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .event-card {
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+
+        .event-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .event-img {
+            height: 200px;
+            overflow: hidden;
+        }
+
+        .event-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+
+        .event-card:hover .event-img img {
+            transform: scale(1.1);
+        }
+
+        .event-content {
+            padding: 20px;
+        }
+
+        .event-title {
+            margin-bottom: 10px;
+            color: var(--cream);
+        }
+
+        .event-date {
+            font-size: 0.9rem;
+            color: rgba(245, 245, 220, 0.8);
+            margin-bottom: 10px;
+        }
+
+        .event-desc {
+            margin-bottom: 15px;
+            font-size: 0.95rem;
+        }
+
+        .event-btn {
+            background-color: var(--coffee-brown);
+            color: var(--cream);
+            padding: 8px 16px;
+            border-radius: var(--border-radius);
+            display: inline-block;
+            transition: var(--transition);
+        }
+
+        .event-btn:hover {
+            background-color: var(--light-brown);
+        }
+
+        /* Gallery Section */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 15px;
+        }
+
+        .gallery-item {
+            height: 250px;
+            overflow: hidden;
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            position: relative;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+
+        .gallery-item::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.3);
+            opacity: 0;
+            transition: var(--transition);
+        }
+
+        .gallery-item:hover::after {
+            opacity: 1;
+        }
+
+        /* Lightbox */
+        .lightbox {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 2000;
+            opacity: 0;
+            pointer-events: none;
+            transition: var(--transition);
+        }
+
+        .lightbox.active {
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        .lightbox-content {
+            max-width: 90%;
+            max-height: 80vh;
+            position: relative;
+        }
+
+        .lightbox-img {
+            max-width: 100%;
+            max-height: 80vh;
+            border-radius: var(--border-radius);
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: -40px;
+            right: 0;
+            color: var(--cream);
+            font-size: 2rem;
+            cursor: pointer;
+            background: none;
+            border: none;
+        }
+
+        /* About Section */
+        .about {
+            background-color: var(--coffee-brown);
+            color: var(--cream);
+        }
+
+        .about .section-title {
+            color: var(--cream);
+        }
+
+        .about .section-title::after {
+            background-color: var(--cream);
+        }
+
+        .about-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: center;
+        }
+
+        .about-img {
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+        }
+
+        .about-content h3 {
+            margin-bottom: 20px;
+            font-size: 1.8rem;
+        }
+
+        .about-content p {
+            margin-bottom: 15px;
+            line-height: 1.8;
+        }
+
+        /* Contact Section */
+        .contact-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+        }
+
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+
+        .contact-item {
+            display: flex;
+            gap: 15px;
+            align-items: flex-start;
+        }
+
+        .contact-icon {
+            font-size: 1.5rem;
+            color: var(--dark-green);
+        }
+
+        .contact-details h3 {
+            margin-bottom: 5px;
+            color: var(--coffee-brown);
+        }
+
+        .contact-details p {
+            color: #666;
+        }
+
+        .contact-form {
+            background-color: var(--off-white);
+            padding: 30px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--coffee-brown);
+            font-weight: 500;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: var(--border-radius);
+            font-family: 'Poppins', sans-serif;
+            transition: var(--transition);
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--dark-green);
+        }
+
+        textarea.form-control {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        .map-container {
+            margin-top: 40px;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            height: 300px;
+        }
+
+        .map-container iframe {
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: var(--dark-green);
+            color: var(--cream);
+            border-radius: 50%;
+            transition: var(--transition);
+        }
+
+        .social-link:hover {
+            background-color: var(--coffee-brown);
+            transform: translateY(-3px);
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--dark-green);
+            color: var(--cream);
+            padding: 50px 0 20px;
+        }
+
+        .footer-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .footer-logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .footer-logo i {
+            font-size: 2rem;
+        }
+
+        .footer-about p {
+            margin-bottom: 20px;
+            line-height: 1.8;
+            color: rgba(245, 245, 220, 0.8);
+        }
+
+        .footer-heading {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .footer-heading::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 2px;
+            background-color: var(--cream);
+        }
+
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+
+        .footer-links a {
+            color: rgba(245, 245, 220, 0.8);
+            transition: var(--transition);
+        }
+
+        .footer-links a:hover {
+            color: var(--cream);
+            padding-left: 5px;
+        }
+
+        .footer-hours p {
+            margin-bottom: 10px;
+            color: rgba(245, 245, 220, 0.8);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(245, 245, 220, 0.2);
+            color: rgba(245, 245, 220, 0.7);
+            font-size: 0.9rem;
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 992px) {
+            .about-container,
+            .contact-container {
+                grid-template-columns: 1fr;
+            }
+
+            .about-img {
+                order: -1;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .mobile-toggle {
+                display: block;
+            }
+
+            nav {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 70%;
+                height: 100vh;
+                background-color: var(--cream);
+                box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+                transition: var(--transition);
+                z-index: 1001;
+                padding: 80px 30px 30px;
+            }
+
+            nav.active {
+                right: 0;
+            }
+
+            nav ul {
+                flex-direction: column;
+                gap: 20px;
+            }
+
+            .nav-close {
+                position: absolute;
+                top: 20px;
+                right: 20px;
+                background: none;
+                border: none;
+                font-size: 1.5rem;
+                color: var(--coffee-brown);
+                cursor: pointer;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero p {
+                font-size: 1.2rem;
+            }
+
+            section {
+                padding: 60px 0;
+            }
+
+            .section-title {
+                margin-bottom: 30px;
+            }
+
+            .menu-tabs {
+                flex-wrap: wrap;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            .gallery-grid {
+                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            }
+
+            .gallery-item {
+                height: 150px;
+            }
+
+            .footer-container {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header id="header">
+        <div class="container header-container">
+            <a href="#" class="logo">
+                <i class="fa-solid fa-mug-hot"></i>
+                <span>It's Street Coffee</span>
+            </a>
+            <button class="mobile-toggle" aria-label="Toggle menu">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+            <nav id="nav">
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#menu">Menu</a></li>
+                    <li><a href="#events">Events</a></li>
+                    <li><a href="#gallery">Gallery</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero" style="background-image: url(ero.png);">
+        <div class="container hero-content">
+            <h1>It's Street Coffee</h1>
+            <p>Sip, Relax, Repeat</p>
+            <a href="#menu" class="btn">View Menu</a>
+        </div>
+    </section>
+
+    <!-- Menu Section -->
+    <section id="menu" class="menu">
+        <div class="container">
+            <h2 class="section-title">Menu</h2>
+            <div class="menu-container">
+                <ul class="menu-list">
+                    <li class="menu-item">
+                        <h3 class="menu-heading">☕ Original</h3>
+                        <ul>
+                            <li>
+                                <span class="menu-name">Espresso</span>
+                                <span class="menu-price">– ₹59</span>
+                            </li>
+                            <li>
+                                <span class="menu-name">Cafe Americano</span>
+                                <span class="menu-price">– ₹69</span>
+                            </li>
+                            <li>
+                                <span class="menu-name">Cappuccino</span>
+                                <span class="menu-price">– ₹79</span>
+                            </li>
+                            <li>
+                                <span class="menu-name">Cafe Latte</span>
+                                <span class="menu-price">– ₹89</span>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="menu-item">
+                        <h3 class="menu-heading">🍵 Hot Tea and Coco</h3>
+                        <ul>
+                            <li>
+                                <span class="menu-name">Assam Tea</span>
+                                <span class="menu-price">– ₹59</span>
+                            </li>
+                            <li>
+                                <span class="menu-name">Green Tea</span>
+                                <span class="menu-price">– ₹59</span>
+                                <span class="menu-label">🟢</span>
+                            </li>
+                            <li>
+                                <span class="menu-name">Lemon Ginger Honey Tea</span>
+                                <span class="menu-price">– ₹69</span>
+                                <span class="menu-label">🟢</span>
+                            </li>
+                            <li>
+                                <span class="menu-name">Traditional Hot Chocolate</span>
+                                <span class="menu-price">– ₹79</span>
+                            </li>
+                            <li>
+                                <span class="menu-name">Oreo Hot Chocolate</span>
+                                <span class="menu-price">– ₹89</span>
+                            </li>
+                            <li>
+                                <span class="menu-name">Brownie Hot Chocolate</span>
+                                <span class="menu-price">– ₹119</span>
+                            </li>
+                            <li>
+                                <span class="menu-name">Nutella Hot Chocolate</span>
+                                <span class="menu-price">– ₹119</span>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="menu-item">
+                        <h3 class="menu-heading">☕ Hot Dessert Coffee</h3>
+                        <ul>
+                            <li>
+                                <span class="menu-name">Cafe Mocha</span>
+                                <span class="menu-price">– ₹99</span>
+                            </li>
+                            <li>
+                                <span class="menu-name">Cafe Irish</span>
+                                <span class="menu-price">– ₹99</span>
+                            </li>
+                            <li>
+                                <span class="menu-name">Caramel Cappuccino</span>
+                                <span class="menu-price">– ₹99</span>
+                            </li>
+                            <li>
+                                <span class="menu-name">Turkish Cappuccino</span>
+                                <span class="menu-price">– ₹99</span>
+                            </li>
+                            <li>
+                                <span class="menu-name">Hazelnut Latte</span>
+                                <span class="menu-price">– ₹99</span>
+                            </li>
+                            <li>
+                                <span class="menu-name">Vanilla Latte</span>
+                                <span class="menu-price">– ₹99</span>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="menu-item">
+                        <h3 class="menu-heading">🧊 Coffee On The Rocks</h3>
+                        <ul>
+                            <li>
+                                <span class="menu-name">Iced Americano</span>
+                                <span class="menu-price">– ₹79</span>
+                            </li>
+                            <li>
+                                <span class="menu-name">Iced Cafe Mocha</span>
+                                <span class="menu-price">– ₹99</span>
+                            </li>
+                            <li>
+                                <span class="menu-name">Iced Caramel Latte</span>
+                                <span class="menu-price">– ₹99</span>
+                            </li>
+                            <li>
+                                <span class="menu-name">Vegan Shake</span>
+                                <span class="menu-price">– ₹109</span>
+                                <span class="menu-label">🟢</span>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <style>
+            .menu-list {
+                display: grid;
+                grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+                gap: 15px;
+                margin: 30px 0;
+            }
+            .menu-item {
+                background-color: #f5f5f5;
+                border-radius: 10px;
+                padding: 15px;
+                border: 1px solid #ddd;
+                box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+                transition: all 0.2s ease;
+            }
+            .menu-item:hover {
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            }
+            .menu-heading {
+                font-weight: 600;
+                margin-bottom: 10px;
+            }
+            .menu-name {
+                font-weight: 400;
+                margin-bottom: 5px;
+            }
+            .menu-price {
+                font-weight: 600;
+                color: #333;
+            }
+            .menu-label {
+                font-size: 12px;
+                color: #666;
+                margin-left: 5px;
+            }
+        </style>
+    </section>
+
+    <!-- Gallery Section -->
+    <section id="gallery" class="gallery">
+        <div class="container">
+            <h2 class="section-title">Gallery</h2>
+            <div class="gallery-grid">
+                <div class="gallery-item" data-img="https://source.unsplash.com/random/1200x800/?cafe-interior">
+                    <img src="a.png" alt="Café interior">
+                </div>
+                <div class="gallery-item" data-img="https://source.unsplash.com/random/1200x800/?barista">
+                    <img src="b.png" alt="Barista crafting coffee">
+                </div>
+                <div class="gallery-item" data-img="https://source.unsplash.com/random/1200x800/?coffee-art">
+                    <img src="c.png" alt="Coffee art">
+                </div>
+                <div class="gallery-item" data-img="https://source.unsplash.com/random/1200x800/?cafe-customers">
+                    <img src="d.png" alt="Happy customers">
+                </div>
+                <div class="gallery-item" data-img="https://source.unsplash.com/random/1200x800/?coffee-beans">
+                    <img src="e.png" alt="Coffee beans">
+                </div>
+                <div class="gallery-item" data-img="https://source.unsplash.com/random/1200x800/?cafe-pastries">
+                    <img src="f.png" alt="Fresh pastries">
+                </div>
+                <div class="gallery-item" data-img="https://source.unsplash.com/random/1200x800/?cafe-outdoor">
+                    <img src="g.png" alt="Outdoor seating">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Lightbox -->
+    <div class="lightbox" id="lightbox">
+        <div class="lightbox-content">
+            <button class="lightbox-close" id="lightbox-close">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            <img src="/placeholder.svg" alt="Gallery image" class="lightbox-img" id="lightbox-img">
+        </div>
+    </div>
+
+    <!-- About Section -->
+    <section id="about" class="about">
+        <div class="container">
+            <h2 class="section-title">About Us</h2>
+            <div class="about-container">
+                <div class="about-content">
+                    <h3>Our Story</h3>
+                    <p>At Street Coffee, we believe that every cup is an opportunity to connect with our customers and share our love for great coffee, smoothies, and desserts. Since our founding, we've been on a mission to create a warm and welcoming environment where people can come together to enjoy delicious beverages and treats.
+
+                        With over 25.5 lacs cups sold and nearly 40 outlets across the country, we've become a beloved destination for coffee lovers and foodies alike. Our dedicated team of baristas and chefs are passionate about their craft and work tirelessly to source the highest quality ingredients and create unique and memorable flavor combinations.
+                        
+                        Whether you're in the mood for a rich and creamy latte, a refreshing smoothie bowl, or a decadent dessert, you can count on Street Coffee to deliver an exceptional experience every time. We're committed to making each and every visit to our cafes a special one, and we can't wait to share our love of coffee and food with you.
+                        
+                        </p>
+                </div>
+                <div class="about-img">
+                    <img src="o.avif" alt="Café owner">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <h2 class="section-title">Contact Us</h2>
+            <div class="contact-container">
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fa-solid fa-location-dot"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h3>Address</h3>
+                            <p>Sr. No. 12, VM Capital Building, 2nd Floor, Above Pizza Hut, Near HDFC Bank Bavdhan, Pune - 411021, Maharashtra</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fa-solid fa-phone"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h3>Phone</h3>
+                            <p>+91 91450 04080</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fa-solid fa-envelope"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h3>Email</h3>
+                            <p>Itstreetcoffee@gmail.com</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fa-solid fa-clock"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h3>Hours</h3>
+                            <p>Monday - Friday: 7:00 AM - 8:00 PM</p>
+                            <p>Saturday - Sunday: 8:00 AM - 9:00 PM</p>
+                        </div>
+                    </div>
+                    <div class="social-links">
+                        <a href="#" class="social-link" aria-label="Instagram">
+                            <i class="fa-brands fa-instagram"></i>
+                        </a>
+                        <a href="#" class="social-link" aria-label="Facebook">
+                            <i class="fa-brands fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="social-link" aria-label="Twitter">
+                            <i class="fa-brands fa-twitter"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="contact-form-container">
+                    <form class="contact-form">
+                        <div class="form-group">
+                            <label for="name">Name</label>
+                            <input type="text" id="name" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Message</label>
+                            <textarea id="message" class="form-control" required></textarea>
+                        </div>
+                        <button type="submit" class="btn">Send Message</button>
+                    </form>
+                </div>
+            </div>
+            <!-- <div class="map-container"> -->
+                <!-- Replace with actual Google Maps embed code in production -->
+                <!-- <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3022.215266754809!2d-73.98784692426385!3d40.75798657138946!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c25855c6480299%3A0x55194ec5a1ae072e!2sTimes%20Square!5e0!3m2!1sen!2sus!4v1683650400000!5m2!1sen!2sus" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div> -->
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-container">
+                <div class="footer-about">
+                    <div class="footer-logo">
+                        <i class="fa-solid fa-mug-hot"></i>
+                        <span>It's Street Coffee</span>
+                    </div>
+                    <p>A cozy spot to enjoy quality coffee, delicious treats, and good company in the heart of the city.</p>
+                </div>
+                <div class="footer-links">
+                    <h3 class="footer-heading">Quick Links</h3>
+                    <ul>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#menu">Menu</a></li>
+                        <li><a href="#events">Events</a></li>
+                        <li><a href="#gallery">Gallery</a></li>
+                        <li><a href="#about">About</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-hours">
+                    <h3 class="footer-heading">Opening Hours</h3>
+                    <p>Monday - Friday: 7:00 AM - 8:00 PM</p>
+                    <p>Saturday - Sunday: 8:00 AM - 9:00 PM</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2023 It's Street Coffee. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        // Mobile Menu Toggle
+        const mobileToggle = document.querySelector('.mobile-toggle');
+        const nav = document.getElementById('nav');
+        const navClose = document.querySelector('.nav-close');
+        
+        mobileToggle.addEventListener('click', () => {
+            nav.classList.add('active');
+        });
+        
+        navClose.addEventListener('click', () => {
+            nav.classList.remove('active');
+        });
+
+        // Sticky Header
+        window.addEventListener('scroll', () => {
+            const header = document.getElementById('header');
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // Menu Tabs
+        const menuTabs = document.querySelectorAll('.menu-tab');
+        const menuContents = document.querySelectorAll('.menu-content');
+        
+        menuTabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                // Remove active class from all tabs and contents
+                menuTabs.forEach(t => t.classList.remove('active'));
+                menuContents.forEach(c => c.classList.remove('active'));
+                
+                // Add active class to clicked tab
+                tab.classList.add('active');
+                
+                // Show corresponding content
+                const target = tab.getAttribute('data-target');
+                document.getElementById(target).classList.add('active');
+            });
+        });
+
+        // Lightbox
+        const galleryItems = document.querySelectorAll('.gallery-item');
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImg = document.getElementById('lightbox-img');
+        const lightboxClose = document.getElementById('lightbox-close');
+        
+        galleryItems.forEach(item => {
+            item.addEventListener('click', () => {
+                const imgSrc = item.getAttribute('data-img');
+                lightboxImg.src = imgSrc;
+                lightbox.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            });
+        });
+        
+        lightboxClose.addEventListener('click', () => {
+            lightbox.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        });
+        
+        lightbox.addEventListener('click', (e) => {
+            if (e.target === lightbox) {
+                lightbox.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            }
+        });
+
+        // Form Submission (prevent default for demo)
+        const contactForm = document.querySelector('.contact-form');
+        
+        contactForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            alert('Thank you for your message! In a real application, this would be sent to the server.');
+            contactForm.reset();
+        });
+
+        // Smooth Scrolling for Navigation Links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                
+                if (targetElement) {
+                    // Close mobile menu if open
+                    if (nav.classList.contains('active')) {
+                        nav.classList.remove('active');
+                    }
+                    
+                    // Scroll to target
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 70, // Adjust for header height
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
